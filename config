@@ -9,10 +9,19 @@ font pango:Fira Code, FontAwesome 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# (No) Title Bars
+for_window [class="^.*"] border pixel 2
 
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec st
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Pulse Audio controls
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -20,21 +29,15 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up l
-set $down k
-set $left j
-set $right semicolon
+# Sreen brightness controls
+# increase screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20
+# decrease screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 
 
-# use Mouse+Mod1 to drag floating windows to their wanted position
-floating_modifier Mod1
-
-# start a terminal
-bindsym Mod1+Return exec i3-sensible-terminal
-
-# kill focused window
-bindsym Mod1+Shift+q kill
+# Touchpad controls
+# toggle touchpad
+bindsym XF86TouchpadToggle exec toggletouchpad.sh 
 
 # start dmenu (a program launcher)
 bindsym Mod1+d exec dmenu_run
@@ -67,11 +70,6 @@ bindsym Mod1+Shift+Down move down
 bindsym Mod1+Shift+Up move up
 bindsym Mod1+Shift+Right move right
 
-# split in horizontal orientation
-bindsym Mod1+h split h
-
-# split in vertical orientation
-bindsym Mod1+v split v
 
 # enter fullscreen mode for the focused container
 bindsym Mod1+f fullscreen toggle
