@@ -168,3 +168,17 @@ bar{
         	urgent_workspace     $red $red $bg
     		}
 }
+
+#############################
+### settings for i3-gaps: ###
+#############################
+
+bindsym $mod+k gaps inner all set 0
+bindsym $mod+g gaps inner all set 15
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only
+# container on this workspace)
+smart_borders on
