@@ -182,3 +182,61 @@ smart_gaps on
 # Smart borders (draw borders around container only if it is not the only
 # container on this workspace)
 smart_borders on
+
+#Mode to increase and decrease gaps
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#########################################
+### my opinionated settings for i3-gaps: ###
+#########################################
+
+bindsym $mod+F1 exec emacs
+bindsym $mod+i exec emacs ~/.config/i3/config
+bindsym $mod+F2 exec firefox
+bindsym $mod+Shift+F2 exec firefox -private-window
+bindsym $mod+F3 exec st -e 'ranger'
+bindsym $mod+Shift+F3 exec nautilus
+bindsym $mod+F4 exec st -e 'ncmpcpp'
+bindsym $mod+Shift+x exec i3lock -c 282828 && systemctl suspend
+bindsym $mod+n exec st -e 'nmtui'
+
+bindsym $mod+F5 exec riot-desktop
+bindsym $mod+F6 exec telegram-desktop
+bindsym $mod+F7 exec sxiv Pictures/Wallpapers
+bindsym $mod+F8 exec 'killall -SIGUSR1 dunst'
+bindsym $mod+Shift+F8 exec 'killall -SIGUSR2 dunst'
+
