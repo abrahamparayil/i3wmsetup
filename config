@@ -240,3 +240,6 @@ bindsym $mod+F7 exec sxiv Pictures/Wallpapers
 bindsym $mod+F8 exec 'killall -SIGUSR1 dunst'
 bindsym $mod+Shift+F8 exec 'killall -SIGUSR2 dunst'
 
+#redshift
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec --no-startup-id redshift
