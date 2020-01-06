@@ -240,6 +240,20 @@ bindsym $mod+F7 exec sxiv Pictures/Wallpapers
 bindsym $mod+F8 exec 'killall -SIGUSR1 dunst'
 bindsym $mod+Shift+F8 exec 'killall -SIGUSR2 dunst'
 
+## Manual management of Screenshots
+# Set the shortcuts and what they do
+set $mode_screenshot Choose: (s) Screen, (r) Region, (c) Clipboard, (C) Region to Clipboard
+mode "$mode_screenshot" {
+    bindsym s exec --no-startup-id maim ~/Pictures/Screenshots/$(date +%s).png, mode "default"
+    bindsym r exec --no-startup-id maim -s ~/Pictures/Screenshots/$(date +%s).png, mode "default"
+    bindsym c exec --no-startup-id maim | xclip -selection clipboard -t image/png, mode "default"
+    bindsym C exec --no-startup-id maim -s | xclip -selection clipboard -t image/png, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 #redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id redshift
